@@ -7,7 +7,7 @@ The project is built on DevStack and is in beta stage. The master branch is in v
 
 CVRM is developed in OpenStack Icehouse (However, it can easily incorporate to later versions(Kilo or Juno).
 
-##The build process is as follows:
+###The build process is as follows:
 * Get it from git
 
 ```
@@ -35,7 +35,7 @@ CVRM is developed in OpenStack Icehouse (However, it can easily incorporate to l
 
 It provides APIs for managing  attributes and  their values and for assigning the attributes to VM and Storages.
 
-##The VM attributes APIs:
+###The VM attributes APIs:
 
 *  Create an attribute
 
@@ -74,7 +74,7 @@ nova att-create --name color
  nova att-value-list --name color
 ```
 
-##The storage attributes APIs:
+###The storage attributes APIs:
 
 *  Create an attribute
 
