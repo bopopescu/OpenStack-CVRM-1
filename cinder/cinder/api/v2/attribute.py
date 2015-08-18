@@ -18,14 +18,15 @@ import traceback
 from cinder.api import common
 from cinder.api.openstack import wsgi
 from cinder import exception
-from cinder import volume
+from cinder.volume import api
 
 
 class Controller(wsgi.Controller):
     """The volume metadata API controller for the OpenStack API."""
 
     def __init__(self):
-        self.volume_api = volume.API()
+	
+        self.api = api.AttributeAPI()
         super(Controller, self).__init__()
 
     def _get_metadata(self, context, volume_id):
@@ -45,24 +46,23 @@ class Controller(wsgi.Controller):
 
     @wsgi.serializers(xml=common.MetadataTemplate)
     @wsgi.deserializers(xml=common.MetadataDeserializer)
-    def create(self, req, volume_id, body):
-	traceback.print_stack()
-	print("in metadat")
-        try:
-            metadata = body['metadata']
+    def create(self, req, body):
+       
+	try:
+            params = body['attribute']
+            name = params['name']
         except (KeyError, TypeError):
             msg = _("Malformed request body")
             raise webob.exc.HTTPBadRequest(explanation=msg)
 
         context = req.environ['cinder.context']
+	#try:
+        attribute=self.api.create_attribute(context, name)
 
-        new_metadata = self._update_volume_metadata(context,
-                                                    volume_id,
-                                                    metadata,
-                                                    delete=False)
+        return {'attribute': attribute}
 
-        return {'metadata': new_metadata}
-
+        #except exception.InvalidAttribute as exc:
+         #   raise webob.exc.HTTPBadRequest(explanation=exc.format_message())
     @wsgi.serializers(xml=common.MetaItemTemplate)
     @wsgi.deserializers(xml=common.MetaItemDeserializer)
     def update(self, req, volume_id, id, body):

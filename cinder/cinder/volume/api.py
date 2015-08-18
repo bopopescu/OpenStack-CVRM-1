@@ -1026,3 +1026,28 @@ class HostAPI(base.Base):
         volume evacuation.
         """
         raise NotImplementedError()
+
+##############MY Change###############
+class AttributeAPI(base.Base):
+    """Subset of the Compute Manager API for managing key pairs."""
+
+
+    def create_attribute(self, context, attname):
+        """Create a new key pair."""
+        #attribute = attribute_obj.Attribute()
+        print "in create_attribute",attname
+        #attribute.name = attname
+        #attribute.project_id = context.project_id
+        return self.db.create_attribute(context, attname)
+	#print context.project_id
+        #return  attribute.create(context)
+        #return keypair, private_key
+
+
+    def list(self, context):
+        #self.ensure_default(context)
+        attribute=attribute_obj.Attribute()
+        return attribute.list(context)
+
+
+

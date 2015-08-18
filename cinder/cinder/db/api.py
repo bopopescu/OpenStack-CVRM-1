@@ -816,3 +816,7 @@ def transfer_destroy(context, transfer_id):
 def transfer_accept(context, transfer_id, user_id, project_id):
     """Accept a volume transfer."""
     return IMPL.transfer_accept(context, transfer_id, user_id, project_id)
+
+##############Attribute API######################
+def create_attribute(context, attname):
+    return IMPL.create_attribute(context, attname)

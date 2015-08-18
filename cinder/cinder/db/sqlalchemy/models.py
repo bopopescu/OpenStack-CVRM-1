@@ -489,3 +489,13 @@ def register_models():
     engine = create_engine(CONF.database.connection, echo=False)
     for model in models:
         model.metadata.create_all(engine)
+
+#################My Edit####################
+class Attribute(BASE, CinderBase):
+    """Storage attribute in the system"""
+    __tablename__ = 'attribute'
+    __table_args__ = ()
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255))
+    project_id = Column(String(255))

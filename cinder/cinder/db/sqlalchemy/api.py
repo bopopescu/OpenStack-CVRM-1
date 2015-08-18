@@ -2850,3 +2850,10 @@ def transfer_accept(context, transfer_id, user_id, project_id):
             update({'deleted': True,
                     'deleted_at': timeutils.utcnow(),
                     'updated_at': literal_column('updated_at')})
+
+def create_attribute(context, attname):
+    attribute_ref = models.Attribute()
+    attribute_ref.project_id = context.project_id
+    attribute_ref.name=attname
+    attribute_ref.save()
+    return attribute_ref
