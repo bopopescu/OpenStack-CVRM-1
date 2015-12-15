@@ -30,7 +30,12 @@ CVRM is developed in OpenStack Icehouse (However, it can easily incorporate to l
 ```
     ./stack.sh
 ```
-
+* Create necessary tables in MySQL to store attributes and constraints
+```
+cd /opt/stack/mysql-script
+./create_nova_tables
+./create_cinder_tables
+```
 #Usage
 
 It provides APIs for managing  attributes and  their values and for assigning the attributes to VM and Storages.
